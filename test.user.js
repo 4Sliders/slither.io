@@ -393,10 +393,9 @@
                 }
             }
         }
+        console.log(w.gsc)
         setTimeout(updateLoop, 1000);
     }
     // Init
     init();
 })(window);
-
-setSkin(snake, 25);
