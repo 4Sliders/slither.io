@@ -378,7 +378,7 @@
         setGraphics();
         if (w.playing) {
             if (positionHUD) {
-                positionHUD = "X: " + (~~w.view_xx || 0) + " Y: " + (~~w.view_yy || 0);
+                positionHUD.textContent = "X: " + (~~w.view_xx || 0) + " Y: " + (~~w.view_yy || 0);
             }
             if (inpIP && w.bso && currentIP != w.bso.ip + ":" + w.bso.po) {
                 currentIP = w.bso.ip + ":" + w.bso.po;
