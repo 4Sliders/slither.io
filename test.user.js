@@ -386,8 +386,7 @@
             </div>
             `;
             
-            var statsDiv = document.querySelector("#stats");
-            statsDiv.innerHTML = html;
+            positionHUD.innerHTML = html;
         }
         setTimeout(updateLoop, 1000);
     }
