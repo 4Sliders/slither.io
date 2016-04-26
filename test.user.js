@@ -13,7 +13,7 @@
 // Source: https://raw.githubusercontent.com/lehgogh/SLICKio/master/test.user.js
 
 (function(w) {
-    var modVersion = "v2.0",
+    var modVersion = "v1.0",
         renderMode = 2, // 3 - normal, 2 - optimized, 1 - simple (mobile)
         normalMode = false,
         gameFPS = null,
@@ -33,16 +33,14 @@
         positionHUD = document.getElementById("position-hud");
         ipHUD = document.getElementById("ip-hud");
         fpsHUD = document.getElementById("fps-hud");
-        // Add zoom
-        if (/firefox/i.test(navigator.userAgent)) {
-            document.addEventListener("DOMMouseScroll", zoom, false);
-        } else {
-            document.body.onmousewheel = zoom;
-        }
         // Quick resp (ESC) and zoom (+ and -)
         w.onkeydown = function(e) {
             if (e.keyCode == 27) {
                 forceConnect();
+            } else if (e.keyCode == 187) {
+                w.gsc += 0.25
+            } else if (e.keyCode == 189) {
+                w.gsc -= 0.25
             }
         };
         // Hijack console log
