@@ -2,7 +2,7 @@
 // @name         SLICKio by LehGogh
 // @namespace    SLICKio
 // @version      1.0
-// @description  Slither.io mod based off of SLITio
+// @description  Slither.io mod based off of SLITio with code from kmc's mod
 // @author       LehGogh
 // @match        http://slither.io/*
 // @updateURL    https://raw.githubusercontent.com/lehgogh/SLICKio/master/test.user.js
@@ -377,16 +377,17 @@
     function updateLoop() {
         setGraphics();
         if (w.playing) {
-            if (positionHUD) {
-                positionHUD.innerHTML = "X: " + (~~w.view_xx || 0) + " Y: " + (~~w.view_yy || 0);
-            }
-            if (inpIP && w.bso && currentIP != w.bso.ip + ":" + w.bso.po) {
-                currentIP = w.bso.ip + ":" + w.bso.po;
-                inpIP.value = currentIP;
-                if (ipHUD) {
-                    ipHUD.textContent = "IP: " + currentIP;
-                }
-            }
+            var html = `
+            <div id="stats-wrapper">
+                IP: ` + w.bso.ip + `<br>
+                X: ` + Math.round(snake.xx) + `<br>
+                Y: ` + Math.round(snake.yy) + `<br>
+                <button onclick="window.connect()">Respawn</button>
+            </div>
+            `;
+            
+            var statsDiv = document.querySelector("#stats");
+            statsDiv.innerHTML = html;
         }
         setTimeout(updateLoop, 1000);
     }
