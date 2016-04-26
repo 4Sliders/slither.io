@@ -200,9 +200,6 @@
             option.value = "1";
             option.text = "Graphic Quality: Low";
             select.appendChild(option);
-            // Menu footer
-            sltMenu.innerHTML += '<a href="http://slitherio.org/" target="_blank" style="color: #85f9ae; opacity: 2;">Visit Slitherio.org</a>  | ';
-            sltMenu.innerHTML += '<a href="http://slitherio.org/forum" target="_blank" style="color: #85f9ae; opacity: 2;"> Visit Slither.io Forum</a>';
             // Get IP input
             inpIP = document.getElementById("server-ip");
             // Get nick
@@ -319,7 +316,7 @@
     // Set leaderboard
     function setLeaderboard() {
         if (w.lbh) {
-            w.lbh.textContent = "Slitherio.org (Top 10)";
+            w.lbh.textContent = "Leaderboard";
             w.lbh.style.fontSize = "20px";
         } else {
             setTimeout(setLeaderboard, 100);
@@ -381,7 +378,7 @@
         setGraphics();
         if (w.playing) {
             if (positionHUD) {
-                positionHUD.textContent = "X: " + (~~w.view_xx || 0) + " Y: " + (~~w.view_yy || 0);
+                positionHUD = "X: " + (~~w.view_xx || 0) + " Y: " + (~~w.view_yy || 0);
             }
             if (inpIP && w.bso && currentIP != w.bso.ip + ":" + w.bso.po) {
                 currentIP = w.bso.ip + ":" + w.bso.po;
@@ -391,7 +388,6 @@
                 }
             }
         }
-        console.log(w.gsc)
         setTimeout(updateLoop, 1000);
     }
     // Init
