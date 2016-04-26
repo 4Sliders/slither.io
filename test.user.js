@@ -5,12 +5,12 @@
 // @description  Slither.io mod based off of SLITio
 // @author       LehGogh
 // @match        http://slither.io/*
-// @updateURL    http://files.slitherio.org/mods/slitherio.org_SLITio_v2.user.js
+// @updateURL    https://raw.githubusercontent.com/lehgogh/SLICKio/master/test.user.js
 // @run-at       document-body
 // @grant        none
 // ==/UserScript==
 
-// Source: http://files.slitherio.org/mods/slitherio.org_SLITio_v2.user.js
+// Source: https://raw.githubusercontent.com/lehgogh/SLICKio/master/test.user.js
 
 (function(w) {
     var modVersion = "v2.0",
@@ -39,7 +39,7 @@
         } else {
             document.body.onmousewheel = zoom;
         }
-        // Quick resp (ESC)
+        // Quick resp (ESC) and zoom (+ and -)
         w.onkeydown = function(e) {
             if (e.keyCode == 27) {
                 forceConnect();
