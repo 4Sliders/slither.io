@@ -378,7 +378,7 @@
         setGraphics();
         if (w.playing) {
             var html = `
-            <div id="stats-wrapper">
+            <div id="stats-wrapper" style="color: #FFFFFF">
                 IP: ` + w.bso.ip + `<br>
                 X: ` + Math.round(snake.xx) + `<br>
                 Y: ` + Math.round(snake.yy) + `<br>
