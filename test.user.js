@@ -12,6 +12,19 @@
 
 // Source: https://raw.githubusercontent.com/lehgogh/SLICKio/master/test.user.js
 
+var topElem = document.createElement('span');
+window.onload = function(){
+    topElem.style.position = 'fixed';
+    topElem.style.zIndex = '666';
+    topElem.style.top = '5px';
+    topElem.style.textAlign = 'center';
+    topElem.style.width = '100%';
+    topElem.style.fontSize = '20px';
+    topElem.style.fontFamily = 'Verdana';
+    topElem.style.color = '#FFF';
+    document.body.appendChild(topElem);
+}
+
 (function(w) {
     var modVersion = "v1.0",
         renderMode = 2, // 3 - normal, 2 - optimized, 1 - simple (mobile)
@@ -386,7 +399,7 @@
             </div>
             `;
             
-            positionHUD.innerHTML = html;
+            topElem.innerHTML = html;
         }
         setTimeout(updateLoop, 1000);
     }
