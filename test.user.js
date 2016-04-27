@@ -18,13 +18,14 @@
         normalMode = false,
         gameFPS = null,
         dataHUD = null,
-        styleHUD = "color: #FFF; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; position: fixed; opacity: 1; z-index: 7;",
+        styleHUD = "color: #FFF; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; position: fixed; z-index: 7;",
         inpNick = null,
         currentIP = null,
         retry = 0,
         bgImage = null;
     function init() {
         // Append DIVs
+        .getElementById(id).style.opacity=1
         appendDiv("data-hud", "smh", styleHUD + "right: 30; bottom: 120px;");
         dataHUD = document.getElementById("data-hud");
         // Quick resp (ESC) and zoom (+ and -)
