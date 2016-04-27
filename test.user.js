@@ -368,7 +368,7 @@
             Y: ` + Math.round(snake.yy) + `<br>
             `;
             
-            statsHUD.innerHTML = html;
+            dataHUD.innerHTML = html;
         }
         setTimeout(updateLoop, 1000);
     }
