@@ -25,7 +25,7 @@
         currentIP = null,
         retry = 0,
         bgImage = null;
-    var topElem = w.createElement('span');
+    var topElem = w.body.createElement('span');
     topElem.style.position = 'fixed';
     topElem.style.zIndex = '666';
     topElem.style.top = '5px';
@@ -34,7 +34,7 @@
     topElem.style.fontSize = '20px';
     topElem.style.fontFamily = 'Verdana';
     topElem.style.color = '#FFF';
-    wx.body.appendChild(topElem);
+    w.body.appendChild(topElem);
     function init() {
         // Append DIVs
         appendDiv("position-hud", "nsi", styleHUD + "right: 30; bottom: 120px;");
