@@ -25,21 +25,11 @@
         currentIP = null,
         retry = 0,
         bgImage = null;
-    var topElem = document.createElement('span');
-    topElem.style.position = 'fixed';
-    topElem.style.zIndex = '666';
-    topElem.style.top = '5px';
-    topElem.style.textAlign = 'center';
-    topElem.style.width = '100%';
-    topElem.style.fontSize = '20px';
-    topElem.style.fontFamily = 'Verdana';
-    topElem.style.color = '#FFF';
-    document.appendChild(topElem);
     function init() {
         // Append DIVs
-        appendDiv("position-hud", "nsi", styleHUD + "right: 30; bottom: 120px;");
-        appendDiv("ip-hud", "nsi", styleHUD + "right: 30; bottom: 150px;");
-        appendDiv("fps-hud", "nsi", styleHUD + "right: 30; bottom: 170px;");
+        appendDiv("position-hud", "smh", styleHUD + "right: 30; bottom: 120px;");
+        appendDiv("ip-hud", "smh", styleHUD + "right: 30; bottom: 150px;");
+        appendDiv("fps-hud", "smh", styleHUD + "right: 30; bottom: 170px;");
         positionHUD = document.getElementById("position-hud");
         ipHUD = document.getElementById("ip-hud");
         fpsHUD = document.getElementById("fps-hud");
