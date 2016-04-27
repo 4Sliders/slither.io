@@ -52,8 +52,6 @@
         setGraphics();
         // Update loop
         updateLoop();
-        // Show FPS
-        showFPS();
     }
     // Append DIV
     function appendDiv(id, className, style) {
