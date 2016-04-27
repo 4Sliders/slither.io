@@ -25,7 +25,7 @@
         bgImage = null;
     function init() {
         // Append DIVs
-        appendDiv("data-hud", "smh", styleHUD + "right: 30; bottom: 120px;");
+        appendDiv("data-hud", "nsi", styleHUD + "right: 30; bottom: 120px;");
         dataHUD = document.getElementById("data-hud");
         // Quick resp (ESC) and zoom (+ and -)
         w.onkeydown = function(e) {
