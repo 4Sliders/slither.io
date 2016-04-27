@@ -17,9 +17,7 @@
         renderMode = 2, // 3 - normal, 2 - optimized, 1 - simple (mobile)
         normalMode = false,
         gameFPS = null,
-        positionHUD = null,
-        ipHUD = null,
-        fpsHUD = null,
+        dataHUD = null,
         styleHUD = "color: #FFF; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; position: fixed; opacity: 0.35; z-index: 7;",
         inpNick = null,
         currentIP = null,
@@ -27,12 +25,8 @@
         bgImage = null;
     function init() {
         // Append DIVs
-        appendDiv("position-hud", "smh", styleHUD + "right: 30; bottom: 120px;");
-        appendDiv("ip-hud", "smh", styleHUD + "right: 30; bottom: 150px;");
-        appendDiv("fps-hud", "smh", styleHUD + "right: 30; bottom: 170px;");
-        positionHUD = document.getElementById("position-hud");
-        ipHUD = document.getElementById("ip-hud");
-        fpsHUD = document.getElementById("fps-hud");
+        appendDiv("data-hud", "smh", styleHUD + "right: 30; bottom: 120px;");
+        dataHUD = document.getElementById("data-hud");
         // Quick resp (ESC) and zoom (+ and -)
         w.onkeydown = function(e) {
             if (e.keyCode == 27) {
@@ -364,29 +358,17 @@
             w.render_mode = renderMode;
         }
     }
-    // Show FPS
-    function showFPS() {
-        if (w.playing && fpsHUD && w.fps && w.lrd_mtm) {
-            if (Date.now() - w.lrd_mtm > 970) {
-                fpsHUD.textContent = "FPS: " + w.fps;
-            }
-        }
-        setTimeout(showFPS, 30);
-    }
     // Update loop
     function updateLoop() {
         setGraphics();
         if (w.playing) {
             var html = `
-            <div id="stats-wrapper" style="color: #FFFFFF">
-                IP: ` + w.bso.ip + `<br>
-                X: ` + Math.round(snake.xx) + `<br>
-                Y: ` + Math.round(snake.yy) + `<br>
-                <button onclick="window.connect()">Respawn</button>
-            </div>
+            IP: ` + w.bso.ip + `<br>
+            X: ` + Math.round(snake.xx) + `<br>
+            Y: ` + Math.round(snake.yy) + `<br>
             `;
             
-            topElem.innerHTML = html;
+            statsHUD.innerHTML = html;
         }
         setTimeout(updateLoop, 1000);
     }
