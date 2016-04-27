@@ -25,7 +25,7 @@
         bgImage = null;
     function init() {
         // Append DIVs
-        .getElementById(id).style.opacity=1
+        w.getElementById(id).style.opacity=1;
         appendDiv("data-hud", "smh", styleHUD + "right: 30; bottom: 120px;");
         dataHUD = document.getElementById("data-hud");
         // Quick resp (ESC) and zoom (+ and -)
