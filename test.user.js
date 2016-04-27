@@ -26,17 +26,15 @@
         retry = 0,
         bgImage = null;
     var topElem = w.createElement('span');
-    window.onload = function(){
-        topElem.style.position = 'fixed';
-        topElem.style.zIndex = '666';
-        topElem.style.top = '5px';
-        topElem.style.textAlign = 'center';
-        topElem.style.width = '100%';
-        topElem.style.fontSize = '20px';
-        topElem.style.fontFamily = 'Verdana';
-        topElem.style.color = '#FFF';
-        w.body.appendChild(topElem);
-    }
+    topElem.style.position = 'fixed';
+    topElem.style.zIndex = '666';
+    topElem.style.top = '5px';
+    topElem.style.textAlign = 'center';
+    topElem.style.width = '100%';
+    topElem.style.fontSize = '20px';
+    topElem.style.fontFamily = 'Verdana';
+    topElem.style.color = '#FFF';
+    wx.body.appendChild(topElem);
     function init() {
         // Append DIVs
         appendDiv("position-hud", "nsi", styleHUD + "right: 30; bottom: 120px;");
