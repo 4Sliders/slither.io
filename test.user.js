@@ -18,7 +18,7 @@
         normalMode = false,
         gameFPS = null,
         dataHUD = null,
-        styleHUD = "color: #FFF; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; position: fixed; z-index: 7;",
+        styleHUD = "color: #FFF; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; position: fixed; opacity: 1; z-index: 100000000;",
         inpNick = null,
         currentIP = null,
         retry = 0,
