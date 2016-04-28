@@ -1,0 +1,315 @@
+tags = [
+	"HERO",
+	"NBK",
+	"DEV"
+];
+
+function set(a, b) {
+	options[a] = b;
+}
+
+options = {
+	'zoom': true,
+	'clans': true,
+	'custombg': false,
+	'parties': true,
+	'lowergph': false,
+	'skinrotator': false,
+	'background': '',
+	'nick': '',
+	'clantag': ''
+};
+
+if (!localStorage["slitherplus"]) {
+	localStorage["slitherplus"] = JSON.stringify(options);
+}
+
+try {
+	options = JSON.parse(localStorage["slitherplus"]);
+} catch (e) {
+	console.log("SlitherPlus: JSON error");
+}
+
+opts = {
+	"Zoom": 'zoom',
+	"Clan tag list": 'clans',
+	"Custom background": 'custombg',
+	"Party mode": 'parties',
+	"Lower graphics": 'lowergph',
+	"Skin rotator": 'skinrotator'
+};
+
+function zoom(e) {
+	if (!window.gsc) { return; }
+	if (!options.zoom) { window.gsc = 0.9; return; }
+	window.gsc *= Math.pow(0.9, e.wheelDelta / -120 || e.detail / 2 || 0);
+	window.gsc > 2 ? window.gsc = 2 : window.gsc < 0.1 ? window.gsc = 0.1 : null;
+}
+
+function setLeaderboard() {
+	if (window.lbh) {
+		window.lbh.textContent = "slitherplus.io";
+	} else {
+		setTimeout(setLeaderboard, 100);
+	}
+}
+
+function addParty() {
+	// jQuery("iframe").css('top', '180px');
+	// jQuery("body").append("<div id='party' style='display: none; position: fixed; left: 6px; top: 6px; z-index: 50; width: 150px; background-color: white; border-radius: 10px; padding: 15px; margin: 10px;'><center style='margin-bottom: 5px'><b>Party</b></center><input class='form-control' style='margin-bottom: 2px;' maxlength='5' placeholder='Party code' width='100px' id='partyCode'><button id='createParty' class='btn btn-primary' style='width: 100%; margin-bottom: 5px'>Create</button><button class='btn btn-primary' style='width: 100%' id='joinParty'>Join</button></div>");
+	
+	$("#playh").after('<div id="party" style="margin: auto; width: 200px; display: block !important; margin-bottom: 25px"><div class="btn-group" style="width: 100%"><button class="btn btn-success" id="createParty" style="width: 50%">Create</button><button style="width: 50%" class="btn btn-primary" id="joinParty">Join</button></div><input id="partyCode" placeholder="Party Code" class="form-control" type="text" style="width: 100%;color:black;text-align:center;font-weight:bold;box-shadow:inset 0 0 3px #000;"></div>');
+	$(".btnt.nsi.sadg1:first").css('margin-bottom', '35px');
+	
+	// $("#party").fadeIn(1000);
+
+	jQuery("#createParty").click(function(e) {
+		if (!window.bso) {
+			$("#partyCode").val("click play");
+			setTimeout(function() {
+				$("#partyCode").val("");
+			}, 1000);
+			return;
+		}
+		
+		$.get("http://51.254.206.4:8080/create/" + window.bso.ip + ':' + window.bso.po, function(data) {
+			$("#partyCode").val(data);
+			forceServer(window.bso.ip, window.bso.po);
+			document.location.href = "http://slither.io/#" + data;
+		});
+		return false;
+	});
+
+	jQuery("#joinParty").click(function(e) {
+		if ($("#partyCode").val() == '') {
+			window.forcing = false;
+			getData("/i49526.txt", o);
+		} else {
+			$.get("http://51.254.206.4:8080/join/" + $("#partyCode").val(), function(data) {
+				if (data == 'error') {
+					$("#partyCode").val('wrong code');
+					
+					setTimeout(function() {
+						$("#partyCode").val('');
+					}, 1000);
+				} else {
+					srv = data.split(":");
+					forceServer(srv[0], srv[1]);
+				}
+			});
+		}
+		return false;
+	});
+}
+
+function asciize(b, typing = false) {
+	var h, c, f;
+	c = b.length;
+	var w = !1;
+	for (h = 0; h < c; h++)
+		if (f = b.charCodeAt(h), 32 > f || 127 < f) {
+			w = !0;
+			break
+		}
+	if (w) {
+		w = "";
+		for (h = 0; h < c; h++) f = b.charCodeAt(h), w = 32 > f || 127 < f ? w + " " : w + String.fromCharCode(f);
+		return w
+	}
+	
+	if (!typing) {
+		window.options.nick = $("#nick").val();
+		window.options.clantag = $("#tag").val();
+		localStorage["slitherplus"] = JSON.stringify(window.options);
+	}
+	
+	return window.options.clans && !typing ? jQuery("#tag").val() + ' ' + b : b;
+}
+
+function addClanTags() {
+	jQuery(".taho").before('<div id="tag_holder" class="taho" style="width: 110px; height: 40px; margin-top: 10px; box-shadow: rgb(0, 0, 0) 0px 6px 50px; opacity: 1; background: rgb(76, 68, 124);"><select class="sumsginp" id="tag" style="width: 85px; top: 0px; outline: 0; height: 35px; padding: 5px; border-radius:29px"></select></div>')
+
+	nick.oninput = function(){var b=this.value,h=asciize(b,true);24<h.length&&(h=h.substr(0,24));b!=h&&(this.value=h)};
+
+	jQuery("#tag").append("<option value='' style='background: rgb(76, 68, 124)'>-</option>");
+	for (tag of tags) {
+		jQuery("#tag").append("<option value='[" + tag + "]' style='background: rgb(76, 68, 124)'>[" + tag + "]</option>");
+	}
+}
+
+if (/firefox/i.test(navigator.userAgent)) {
+	document.addEventListener("DOMMouseScroll", zoom, false);
+} else {
+	document.body.onmousewheel = zoom;
+}
+
+function setBackground(url = '/s/bg45.jpg') {
+	ii.src = url;
+}
+
+function setLowerGraphics(a) {
+	if (a) {
+		setBackground('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AQYBigs0bXWaQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADUlEQVQI12P4//8/AwAI/AL+XJ/P2gAAAABJRU5ErkJggg==');
+		render_mode = 1;
+	} else {
+		if (!options.custombg) {
+			setBackground();
+		} else {
+			setBackground(options.background);
+		}
+		render_mode = 2;
+	}
+}
+
+function skinRotator(i = 0) {
+	if (typeof ws != "undefined" && options.skinrotator && typeof snake != "undefined" && snake != null) {
+		setSkin(snake, i++);
+	}
+	
+	if (i > 25) i = 0;
+	setTimeout(skinRotator, 1000, i);
+}
+
+function addOptions() {
+	jQuery("#saveh").after('<div id="options" style="width: 260px; color: rgb(128, 88, 208); border-radius: 29px; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; font-size: 14px; margin: 0px auto 100px; padding: 10px 14px; background-color: rgb(30, 38, 46);"></div>');
+	for (option in opts) {
+		if (option == "Clan tag list" || option == "Party mode") {
+			continue;
+		}
+		jQuery("#options").append('<div class="option"><span>' + option + '</span><label id="' + opts[option] + '" class="' + (options[opts[option]] ? 'on' : 'off') + '">' + (options[opts[option]] ? 'ON' : 'OFF') + '</label></div>');
+		jQuery("#" + opts[option]).click(function() {
+			if (jQuery(this).attr('class') == 'on') {
+				jQuery(this).attr('class', 'off');
+				jQuery(this).html('OFF');
+				set(jQuery(this).attr('id'), false);
+			} else {
+				jQuery(this).attr('class', 'on');
+				jQuery(this).html('ON');
+				set(jQuery(this).attr('id'), true);
+			}
+		});
+	}
+
+	jQuery("#lowergph").click(function() {
+		if (jQuery(this).attr('class') == 'on') {
+			setLowerGraphics(true);
+		} else {
+			setLowerGraphics(false);
+		}
+	});
+	
+	jQuery("#custombg").click(function() {
+		if (jQuery(this).attr('class') == 'on') {
+			options.custombg = false;
+			url = prompt('Enter new URL (image):', '');
+			if (url && url.length > 10) {
+				options.custombg = true;
+				options.background = url;
+				setBackground(url);
+			} else {
+				options.background = '';
+				setBackground();
+				jQuery("#custombg").attr('class', 'off');
+				jQuery("#custombg").html('OFF');
+			}
+		} else {
+			options.background = '';
+			setBackground();
+		}
+	});
+	
+	jQuery(".option").attr('style', 'color: rgb(128, 88, 208); border-radius: 29px; margin: 10px auto; padding: 8px; background-color: rgb(76, 68, 124)');
+	jQuery(".option > span").attr('style', 'height: 24px; color: rgb(224, 224, 255); margin-left: 5px');
+	jQuery(".option > label").attr('style', 'float: right; width: 67px; text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px;');
+	jQuery("head").append("<style type='text/css'>label.on{background-color: rgb(86, 172, 129)}label.off{background-color:#861B1B}</style>");
+	
+	jQuery("#tag").val(options.clantag);
+	jQuery("#nick").val(options.nick);
+}
+
+function resizeView() {
+	if (window.resize) {
+		window.lww = 0; 
+		window.wsu = 0;
+		window.resize();
+		var wh = Math.ceil(window.innerHeight);
+		if (wh < 800) {
+			var login = document.getElementById("login");
+			window.lgbsc = wh / 800;
+			login.style.top = - (Math.round(wh * (1 - window.lgbsc) * 1E5) / 1E5) + "px";
+			if (window.trf) {
+				window.trf(login, "scale(" + window.lgbsc + "," + window.lgbsc + ")");
+			}
+		}
+	} else {
+		setTimeout(resizeView, 100);
+	}
+}
+
+
+function addKeyEvents() {
+	$(document).keydown(function(e) {
+		 if (e.keyCode == 27) {
+			if (typeof bso != "undefined") {
+				forcing = true;
+				connect();
+			}
+		} else if (e.keyCode == 9) {
+			e.preventDefault();
+			$("#ipBox").toggle();
+		}
+	});
+}
+
+if (options.custombg && ii.src != options.background) {
+	setBackground(options.background);
+}
+
+function loop() {
+	if (typeof bso != "undefined") {
+		$("#ipAddress").html(bso.ip + ":" + bso.po);
+	}
+	
+	setTimeout(loop, 1000);
+}
+
+$("iframe").attr('src', 'http://slitherplus.io/social.html');
+$("body").append('<div id="ipBox" style="position:fixed;bottom: 120px; right: 20px; color: lightgray; z-index:99999999;">IP: <span id="ipAddress">play first</span> <label style="float: right;text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px;width: 140px; margin-left: 10px;" id="ip-connect" class="on">Connect to IP</label></div>');
+
+$("#ip-connect").click(function() {
+	eipaddr = prompt('Enter the IP address:', '');
+	if (eipaddr && eipaddr.indexOf(":") != -1 && eipaddr.indexOf(".") != -1) {
+		forceServer(eipaddr.split(":")[0], eipaddr.split(":")[1]);
+		connect();
+	}
+});
+
+if (document.location.href.indexOf("#") != -1) {
+	$.get("http://51.254.206.4:8080/join/" + document.location.href.substr(document.location.href.indexOf("#")+1,6), function(data) {
+		if (data == 'error') {
+			$("#partyCode").val('wrong code');
+			
+			setTimeout(function() {
+				$("#partyCode").val('');
+			}, 1000);
+		} else {
+			$("#partyCode").val(document.location.href.substr(document.location.href.indexOf("#")+1,6));
+			srv = data.split(":");
+			forceServer(srv[0], srv[1]);
+		}
+	});
+}
+
+setLeaderboard();
+addParty();
+addClanTags();
+skinRotator();
+addOptions();
+resizeView();
+addKeyEvents();
+loop();
+
+$("#createParty").css('border-bottom-left-radius', '0');
+$("#joinParty").css('border-bottom-right-radius', '0');
+$("#partyCode").css('border-top-left-radius', '0');
+$("#partyCode").css('border-top-right-radius', '0');
